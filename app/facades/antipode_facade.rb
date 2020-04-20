@@ -1,11 +1,10 @@
 class AntipodeFacade
   def initialize(search_location)
     @search_location = search_location
-    @get = get_location_name
   end
 
-  def antipode
-    require "pry"; binding.pry
+  def antipode_info
+    [get_location_name, [antipode_forecast.summary, antipode_forecast.current_temperature], search_coordinates.location]
   end
 
   private

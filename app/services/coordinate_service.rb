@@ -17,7 +17,18 @@ class CoordinateService
     coordinate_json[:results].first[:geometry][:location][:lat]
   end
 
+  def location_name(lat_long)
+    location_name_json(lat_long)[:results][1][:formatted_address]
+  end
+
   private
+
+  def location_name_json(lat_long)
+    response = coordinate_conn.get('/maps/api/geocode/json') do |request|
+      request.params[:latlng] = "#{lat_long}"
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
 
   def coordinate_json
     response = coordinate_conn.get('/maps/api/geocode/json') do |request|

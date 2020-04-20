@@ -2,6 +2,9 @@ class CoordinateService
 
   def initialize(params_location)
     @params_location = params_location
+    @location ||= coordinate_json[:results].first[:formatted_address]
+    @longitude ||= coordinate_json[:results].first[:geometry][:location][:lng]
+    @latitude ||= coordinate_json[:results].first[:geometry][:location][:lat]
   end
 
   def location

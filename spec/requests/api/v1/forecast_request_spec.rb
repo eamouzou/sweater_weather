@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Retrieve Weather Forecast' do
+RSpec.describe 'Retrieve Weather Forecast', :vcr do
   it 'returns the forecast for a city' do
     city = 'aurora,co'
 

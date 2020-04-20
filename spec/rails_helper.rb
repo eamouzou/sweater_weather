@@ -1,5 +1,12 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'simplecov'
+require 'rspec/rails'
+require 'vcr'
+require 'webmock/rspec'
+
+SimpleCov.start
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -61,4 +68,33 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+Capybara.register_driver :selenium do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :selenium_chrome_headless
+
+Capybara.configure do |config|
+  config.default_max_wait_time = 5
+  config.server = :puma, { Silent: true }
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
+VCR.configure do |config|
+  config.ignore_localhost = true
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.allow_http_connections_when_no_cassette = true
+  config.default_cassette_options = { :record => :new_episodes, :erb => true, allow_playback_repeats: true }
+  config.configure_rspec_metadata!
+  config.filter_sensitive_data('<OPEN_WEATHER_API_KEY>') { ENV['OPEN_WEATHER_API_KEY'] }
 end

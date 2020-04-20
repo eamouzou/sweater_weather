@@ -5,7 +5,7 @@ class ForecastFacade
   end
 
   def weather_info
-    weather_data.weather_info
+    weather.data
   end
 
   private
@@ -14,8 +14,8 @@ class ForecastFacade
     coordinate ||= CoordinateService.new(@params_location)
   end
 
-  def weather_data
-    weather_data ||= WeatherDataService.new(coordinate.latitude, coordinate.longitude)
+  def weather
+    weather ||= WeatherDataService.new(coordinate.latitude, coordinate.longitude)
   end
 
 end

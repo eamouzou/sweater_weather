@@ -4,7 +4,7 @@ class WeatherDataService
     @longitude = longitude
   end
 
-  def weather_info
+  def data
     JSON.parse(weather_json.body, symbolize_names: true)
   end
 

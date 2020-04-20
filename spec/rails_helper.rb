@@ -96,4 +96,5 @@ VCR.configure do |config|
   config.default_cassette_options = { :record => :new_episodes, :erb => true, allow_playback_repeats: true }
   config.configure_rspec_metadata!
   config.filter_sensitive_data('<OPEN_WEATHER_API_KEY>') { ENV['OPEN_WEATHER_API_KEY'] }
+  config.filter_sensitive_data('<GEOCODING_API_KEY>') { ENV['GEOCODING_API_KEY'] }
 end

@@ -10,7 +10,7 @@ RSpec.describe 'Background Image' do
 
     background_response = JSON.parse(response.body, symbolize_names: true)
 
-    let(:url) { background_response[:data][:attributes][:url] }
-    specify { expect(url).to exist }
+    expect(background_response[:data][:attributes].keys.include?(:url)).to eq(true)
+    expect(background_response[:data][:attributes][:url]).to be_truthy
   end
 end

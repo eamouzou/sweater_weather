@@ -1,7 +1,11 @@
 class AntipodeFacade
   def initialize(search_location)
     @search_location = search_location
-    @get = antipode_forecast
+    @get = get_location_name
+  end
+
+  def antipode
+    require "pry"; binding.pry
   end
 
   private
@@ -17,7 +21,11 @@ class AntipodeFacade
   def antipode_forecast
     weather_info = WeatherDataService.new(antipode_coordinates.latitude, antipode_coordinates.longitude).data
     antipode_forecast = Forecast.new(weather_info)
-    require "pry"; binding.pry
+  end
+
+  def get_location_name
+    lat_long = "#{antipode_coordinates.latitude}, #{antipode_coordinates.longitude}"
+    search_coordinates.location_name(lat_long)
   end
 
 end

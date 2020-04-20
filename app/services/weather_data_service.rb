@@ -17,6 +17,8 @@ class WeatherDataService
   def weather_conn
     Faraday.new(url: 'https://api.openweathermap.org') do |f|
       f.adapter Faraday.default_adapter
+      f.params["units"] = "imperial"
+      f.params["timezone"] = "UTC -7"
     end
   end
 end

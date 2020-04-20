@@ -3,8 +3,14 @@ class AntipodeService
   def initialize(search_latitude, search_longitude)
     @search_latitude = search_latitude
     @search_longitude = search_longitude
-    @longitude ||= antipode_json[:data][:attributes][:long]
-    @latitude ||= antipode_json[:data][:attributes][:lat]
+  end
+
+  def latitude
+    antipode_json[:data][:attributes][:lat]
+  end
+
+  def longitude
+    antipode_json[:data][:attributes][:long]
   end
 
   private

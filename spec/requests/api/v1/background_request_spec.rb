@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Background Image' do
+RSpec.describe 'Background Image', :vcr do
   it 'returns the url for a location specific ackground image' do
     city = 'aurora,co'
 

@@ -2,7 +2,6 @@ class BackgroundService
 
   def initialize(params_location)
     @params_location = params_location.gsub(",", "+")
-    @get = url
   end
 
   def id

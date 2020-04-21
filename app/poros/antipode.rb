@@ -1,8 +1,8 @@
 class Antipode
   def initialize(data)
-    @location_name = data[0]
-    @forecast_data = data[1]
-    @search_location = data[2]
+    @location_name = data[:location_name] #make data hash with named keys (Ex: data[:location])
+    @forecast_data = data[:forecast]
+    @search_location = data[:search_location]
   end
 
   def id
@@ -14,7 +14,7 @@ class Antipode
   end
 
   def forecast
-    {"summary": "#{@forecast_data[0]}", "current_temperature": "#{@forecast_data[1]}"}
+    @forecast_data
   end
 
   def search_location

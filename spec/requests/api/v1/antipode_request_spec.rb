@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Antipode API' do
+RSpec.describe 'Antipode API', :vcr do
   it "gets antipode attributes from location" do
     get '/api/v1/antipode?location=hongkong'
 

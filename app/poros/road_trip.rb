@@ -3,7 +3,6 @@ class RoadTrip
   def initialize(origin, destination)
     @origin = origin
     @destination = destination
-    @get = arrival_forecast
   end
 
   def id
@@ -31,9 +30,9 @@ class RoadTrip
   end
 
   def arrival_forecast
-    # duration = Time.at(travel_time_data[:value]).utc.strftime("%H:%M:%S")
     weather_info = WeatherDataService.new(destination_coordinates.latitude, @destination_coordinates.longitude).data
-    weather_info[:current][:temp].to_s + "°, " + weather_info[:current][:weather][0][:description].titleize
+    time_to_hour = (travel_time_data[:value] / 60.0 / 60.0).round
+    weather_info[:hourly][time_to_hour - 1][:temp].to_s + "°, " + weather_info[:hourly][time_to_hour - 1][:weather][0][:description].titleize
   end
 
 end

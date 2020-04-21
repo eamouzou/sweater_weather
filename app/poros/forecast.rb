@@ -30,4 +30,12 @@ class Forecast
   def daily
     @weather_info[:daily]
   end
+
+  def summary
+    @weather_info[:current][:weather][0][:main]
+  end
+
+  def current_temperature
+    @weather_info[:current][:temp]
+  end
 end

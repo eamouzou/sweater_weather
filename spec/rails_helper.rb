@@ -98,4 +98,5 @@ VCR.configure do |config|
   config.filter_sensitive_data('<OPEN_WEATHER_API_KEY>') { ENV['OPEN_WEATHER_API_KEY'] }
   config.filter_sensitive_data('<GEOCODING_API_KEY>') { ENV['GEOCODING_API_KEY'] }
   config.filter_sensitive_data('<UNSPLASH_ACCESS_KEY>') { ENV['UNSPLASH_ACCESS_KEY'] }
+  config.filter_sensitive_data('<AMYPODE_API_KEY>') { ENV['AMYPODE_API_KEY'] }
 end

@@ -6,11 +6,13 @@ class AntipodeService
   end
 
   def latitude
-    antipode_json[:data][:attributes][:lat]
+    @antipode_memoized ||= antipode_json
+    @antipode_memoized[:data][:attributes][:lat]
   end
 
   def longitude
-    antipode_json[:data][:attributes][:long]
+    @antipode_memoized ||= antipode_json
+    @antipode_memoized[:data][:attributes][:long]
   end
 
   private

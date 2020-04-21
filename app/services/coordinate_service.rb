@@ -34,7 +34,6 @@ class CoordinateService
     response = coordinate_conn.get('/maps/api/geocode/json') do |request|
       request.params[:address] = "#{@params_location}"
     end
-    puts 'coordinate_json_api_call' #gives you a sense of how many times it is called
     @coordinate_json ||= JSON.parse(response.body, symbolize_names: true)
   end
 

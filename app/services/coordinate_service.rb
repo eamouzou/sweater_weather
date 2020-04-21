@@ -6,15 +6,16 @@ class CoordinateService
   end
 
   def location
-    coordinate_json[:results].first[:formatted_address]
+    @location
   end
 
   def longitude
-    coordinate_json[:results].first[:geometry][:location][:lng]
+    @coordinate_json ||= coordinate_json
+    @coordinate_json[:results].first[:geometry][:location][:lng]
   end
 
   def latitude
-    coordinate_json[:results].first[:geometry][:location][:lat]
+    @coordinate_json[:results].first[:geometry][:location][:lat]
   end
 
   def location_name(lat_long)
@@ -22,7 +23,6 @@ class CoordinateService
   end
 
   private
-
   def location_name_json(lat_long)
     response = coordinate_conn.get('/maps/api/geocode/json') do |request|
       request.params[:latlng] = "#{lat_long}"
@@ -34,7 +34,8 @@ class CoordinateService
     response = coordinate_conn.get('/maps/api/geocode/json') do |request|
       request.params[:address] = "#{@params_location}"
     end
-    JSON.parse(response.body, symbolize_names: true)
+    puts 'coordinate_json_api_call' #gives you a sense of how many times it is called
+    @coordinate_json ||= JSON.parse(response.body, symbolize_names: true)
   end
 
   def coordinate_conn
